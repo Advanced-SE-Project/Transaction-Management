@@ -90,24 +90,89 @@ The API is documented using Swagger. After starting the server, go to `http://lo
     - `type` (string, required): Either `receive` or `spent`.
     - `amount` (number, required): The transaction amount.
     - `category` (string, required): The transaction category.
+  - **Example Response**:
+    ```json
+    {
+      "id": 1,
+      "date": "2023-11-03T10:00:00Z",
+      "type": "spent",
+      "amount": 150.75,
+      "category": "Groceries"
+    }
+    ```
 
 - **Retrieve All Transactions**
   - **GET** `/api/transactions`
   - Retrieve all transactions.
+  - **Example Response**:
+    ```json
+    [
+      {
+        "id": 1,
+        "date": "2023-11-03T10:00:00Z",
+        "type": "spent",
+        "amount": 150.75,
+        "category": "Groceries"
+      },
+      {
+        "id": 2,
+        "date": "2023-11-04T15:30:00Z",
+        "type": "receive",
+        "amount": 2000.00,
+        "category": "Salary"
+      }
+    ]
+    ```
 
 - **Retrieve Spent Transactions**
   - **GET** `/api/transactions/spent`
   - Retrieve all transactions where `type` is `spent`.
+  - **Example Response**:
+    ```json
+    [
+      {
+        "id": 1,
+        "date": "2023-11-03T10:00:00Z",
+        "type": "spent",
+        "amount": 150.75,
+        "category": "Groceries"
+      }
+    ]
+    ```
 
 - **Retrieve Receive Transactions**
   - **GET** `/api/transactions/receive`
   - Retrieve all transactions where `type` is `receive`.
+  - **Example Response**:
+    ```json
+    [
+      {
+        "id": 2,
+        "date": "2023-11-04T15:30:00Z",
+        "type": "receive",
+        "amount": 2000.00,
+        "category": "Salary"
+      }
+    ]
+    ```
 
 - **Retrieve Transactions by Category**
   - **GET** `/api/transactions/category/{category}`
   - Retrieve transactions filtered by a specific category.
   - **Path Parameters**:
     - `category` (string, required): The category to filter transactions by.
+  - **Example Response**:
+    ```json
+    [
+      {
+        "id": 1,
+        "date": "2023-11-03T10:00:00Z",
+        "type": "spent",
+        "amount": 150.75,
+        "category": "Groceries"
+      }
+    ]
+    ```
 
 - **Update Transaction by ID**
   - **PUT** `/api/transactions/{id}`
@@ -119,12 +184,28 @@ The API is documented using Swagger. After starting the server, go to `http://lo
     - `type` (string, optional): Updated type, either `receive` or `spent`.
     - `amount` (number, optional): Updated amount.
     - `category` (string, optional): Updated category.
+  - **Example Response**:
+    ```json
+    {
+      "id": 1,
+      "date": "2023-11-03T12:00:00Z",
+      "type": "spent",
+      "amount": 175.00,
+      "category": "Groceries"
+    }
+    ```
 
 - **Delete Transaction by ID**
   - **DELETE** `/api/transactions/{id}`
   - Delete a transaction by ID.
   - **Path Parameters**:
     - `id` (integer, required): The ID of the transaction to delete.
+  - **Example Response**:
+    ```json
+    {
+      "message": "Transaction deleted"
+    }
+    ```
 
 ## Technologies Used
 
