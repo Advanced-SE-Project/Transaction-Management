@@ -1,28 +1,41 @@
 const express = require('express');
+const transactionRoutes = require('./routes/transactions');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger');
-
+const swaggerJSDoc = require('swagger-jsdoc');
 const app = express();
 const PORT = 3000;
 
-// Set up Swagger UI
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Swagger setup
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Transaction Management API',
+    version: '1.0.0',
+    description: 'API documentation for the Transaction Management microservice',
+  },
+  servers: [
+    {
+      url: 'http://localhost:3000',
+    },
+  ],
+};
 
-// Example route
-/**
- * @swagger
- * /:
- *   get:
- *     summary: Returns a welcome message
- *     responses:
- *       200:
- *         description: A successful response
- */
-app.get('/', (req, res) => {
-  res.send('Hello, Express!');
-});
+const options = {
+  swaggerDefinition,
+  apis: ['./routes/transactions.js'], 
+};
 
-// Start the server
+const swaggerSpec = swaggerJSDoc(options);
+
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Set up Swagger UI
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use('/api', transactionRoutes);
+
+// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`Swagger docs available at http://localhost:${PORT}/swagger`);
