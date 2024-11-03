@@ -1,24 +1,42 @@
-# Node modules
+# Node.js-Related Files
 node_modules/
 
-# Logs
-logs/
-*.log
+# Prisma-Related Files
+prisma/.env
+generated/
+
+# OS or Editor-Generated Files
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Log and Temporary Files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+*.log.*
+debug.log
 
-# Environment variables
+# Environmental Files
 .env
+.env.local
 
-# OS-specific files (macOS, Windows)
-.DS_Store
-Thumbs.db
+# Dependency Lock Files 
+package-lock.json
+yarn.lock
 
-# Debugging files
-.vscode/
-.idea/
-
-# Build output
-dist/
+# Build and Output Files
 build/
+dist/
+out/
+
+# Database Files 
+*.sqlite
+*.db
