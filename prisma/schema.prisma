@@ -15,6 +15,7 @@ datasource db {
 
 model Transaction {
   id         Int      @id @default(autoincrement())
+  userId     Int  
   date       DateTime
   type       String   // "receive" or "spent"
   amount     Float
