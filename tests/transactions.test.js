@@ -37,6 +37,25 @@ describe('Transaction API Endpoints', () => {
     transactionId = response.body.id; // Save the transaction ID for later tests
   });
 
+  // Test for missing required fields
+  it('should return 400 for missing required fields when creating a transaction', async () => {
+    const response = await request(app)
+      .post('/api/transactions')
+      .send({ type: "spent", amount: 100 });
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('error');
+  });
+
+  // Test for invalid transaction type
+  it('should return 400 for an invalid transaction type', async () => {
+    const invalidData = { ...mockTransaction, type: "invalid_type" };
+    const response = await request(app)
+      .post('/api/transactions')
+      .send(invalidData);
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('error');
+  });
+
   // Test for retrieving all transactions for a user
   it('should retrieve all transactions for a specific user', async () => {
     const response = await request(app)
@@ -76,6 +95,15 @@ describe('Transaction API Endpoints', () => {
     expect(response.body[0].type).toBe("receive");
   });
 
+  // Test for invalid transaction ID when updating
+  it('should return 404 for a non-existent transaction ID when updating', async () => {
+    const response = await request(app)
+      .put('/api/transactions/999999') // Use a non-existent ID
+      .send({ ...mockTransaction, amount: 100 });
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('error', 'Transaction not found');
+  });
+
   // Test for updating a transaction by ID
   it('should update a transaction by ID', async () => {
     const updatedData = { ...mockTransaction, amount: 200 };
@@ -86,6 +114,15 @@ describe('Transaction API Endpoints', () => {
     
     expect(response.status).toBe(200);
     expect(response.body.amount).toBe(200); // Check if the amount is updated
+  });
+
+  // Test for invalid transaction ID when deleting
+  it('should return 404 for a non-existent transaction ID when deleting', async () => {
+    const response = await request(app)
+      .delete('/api/transactions/999999') // Use a non-existent ID
+      .query({ userId: mockTransaction.userId });
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('error', 'Transaction not found');
   });
 
   // Test for deleting a transaction by ID

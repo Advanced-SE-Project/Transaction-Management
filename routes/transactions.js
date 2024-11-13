@@ -17,6 +17,12 @@ const prisma = new PrismaClient();
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - date
+ *               - type
+ *               - amount
+ *               - category
+ *               - userId
  *             properties:
  *               date:
  *                 type: string
@@ -26,6 +32,7 @@ const prisma = new PrismaClient();
  *                 type: string
  *                 enum: [receive, spent]
  *                 example: "spent"
+ *                 description: Must be either "receive" or "spent"
  *               amount:
  *                 type: number
  *                 example: 150.75
@@ -62,18 +69,40 @@ const prisma = new PrismaClient();
  *                 userId:
  *                   type: integer
  *                   example: 1
+ *       400:
+ *         description: Bad Request - validation error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Invalid transaction type" 
  */
 router.post('/transactions', async (req, res) => {
     const { date, type, amount, category, userId } = req.body;
-    try {
-        const transaction = await prisma.transaction.create({
-            data: { date, type, amount, category, userId },
-        });
-        res.json(transaction);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+  
+    // Validate required fields
+    if (!date || !type || !amount || !category || !userId) {
+      return res.status(400).json({ error: 'All fields are required' });
     }
-});
+  
+    // Validate transaction type
+    const validTypes = ['spent', 'receive'];
+    if (!validTypes.includes(type)) {
+      return res.status(400).json({ error: 'Invalid transaction type' });
+    }
+  
+    try {
+      const transaction = await prisma.transaction.create({
+        data: { date, type, amount, category, userId },
+      });
+      res.json(transaction);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 // Retrieve All Transactions for a Specific User
 /**
