@@ -35,8 +35,13 @@ app.use(express.json());
 // Routes
 app.use('/api', transactionRoutes);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`Swagger docs available at http://localhost:${PORT}/swagger`);
-});
+// Only start the server if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Swagger docs available at http://localhost:${PORT}/swagger`);
+  });
+}
+
+// Export the app instance for testing
+module.exports = app;
