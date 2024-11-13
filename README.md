@@ -88,7 +88,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
   - **POST** `/api/transactions`
   - Create a new transaction.
   - **Body Parameters**:
-    - `date` (string, required): Transaction date in ISO format.
+    - `date` (string, required): Transaction date in DD-MM-YYYY format.
     - `type` (string, required): Either `receive` or `spent`.
     - `amount` (number, required): The transaction amount.
     - `category` (string, required): The transaction category.
@@ -97,7 +97,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
     ```json
     {
       "id": 1,
-      "date": "2023-11-03T10:00:00Z",
+      "date": "03-11-2023",
       "type": "spent",
       "amount": 150.75,
       "category": "Groceries",
@@ -115,7 +115,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
     [
       {
         "id": 1,
-        "date": "2023-11-03T10:00:00Z",
+        "date": "03-11-2023",
         "type": "spent",
         "amount": 150.75,
         "category": "Groceries",
@@ -123,7 +123,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
       },
       {
         "id": 2,
-        "date": "2023-11-04T15:30:00Z",
+        "date": "04-11-2023",
         "type": "receive",
         "amount": 2000.00,
         "category": "Salary",
@@ -142,7 +142,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
     [
       {
         "id": 1,
-        "date": "2023-11-03T10:00:00Z",
+        "date": "03-11-2023",
         "type": "spent",
         "amount": 150.75,
         "category": "Groceries",
@@ -161,7 +161,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
     [
       {
         "id": 2,
-        "date": "2023-11-04T15:30:00Z",
+        "date": "04-11-2023",
         "type": "receive",
         "amount": 2000.00,
         "category": "Salary",
@@ -182,7 +182,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
     [
       {
         "id": 1,
-        "date": "2023-11-03T10:00:00Z",
+        "date": "03-11-2023",
         "type": "spent",
         "amount": 150.75,
         "category": "Groceries",
@@ -197,7 +197,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
   - **Path Parameters**:
     - `id` (integer, required): The ID of the transaction to update.
   - **Body Parameters**:
-    - `date` (string, optional): Updated date in ISO format.
+    - `date` (string, optional): Updated date in DD-MM-YYYY format.
     - `type` (string, optional): Updated type, either `receive` or `spent`.
     - `amount` (number, optional): Updated amount.
     - `category` (string, optional): Updated category.
@@ -206,7 +206,7 @@ Each endpoint requires the `userId` to ensure transactions are managed per user.
     ```json
     {
       "id": 1,
-      "date": "2023-11-03T12:00:00Z",
+      "date": "03-11-2023",
       "type": "spent",
       "amount": 175.00,
       "category": "Groceries",
