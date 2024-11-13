@@ -1,7 +1,7 @@
 
 # Transaction Management Microservice
 
-A microservice for managing transactions, with full CRUD capabilities. This microservice is built with Node.js, Express.js, PostgreSQL, and Prisma ORM. It includes Swagger documentation for easy interaction with the API.
+A microservice for managing transactions, with full CRUD capabilities, designed to handle transactions associated with individual users. This microservice is built with Node.js, Express.js, PostgreSQL, and Prisma ORM. It includes Swagger documentation for easy interaction with the API.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ A microservice for managing transactions, with full CRUD capabilities. This micr
 
 ## Features
 
-- Create, retrieve, update, and delete transactions.
+- Create, retrieve, update, and delete transactions linked to specific users.
 - Filter transactions by type (`spent` or `receive`) and category.
 - Documentation with Swagger UI for easy API exploration.
 
@@ -82,94 +82,111 @@ The API is documented using Swagger. After starting the server, go to `http://lo
 
 ### Transaction Endpoints
 
+Each endpoint requires the `userId` to ensure transactions are managed per user.
+
 - **Create Transaction**
   - **POST** `/api/transactions`
   - Create a new transaction.
   - **Body Parameters**:
-    - `date` (string, required): Transaction date in ISO format.
+    - `date` (string, required): Transaction date in DD-MM-YYYY format.
     - `type` (string, required): Either `receive` or `spent`.
     - `amount` (number, required): The transaction amount.
     - `category` (string, required): The transaction category.
+    - `userId` (integer, required): The ID of the user creating the transaction.
   - **Example Response**:
     ```json
     {
       "id": 1,
-      "date": "2023-11-03T10:00:00Z",
+      "date": "03-11-2023",
       "type": "spent",
       "amount": 150.75,
-      "category": "Groceries"
+      "category": "Groceries",
+      "userId": 1
     }
     ```
 
-- **Retrieve All Transactions**
-  - **GET** `/api/transactions`
-  - Retrieve all transactions.
+- **Retrieve All Transactions for a User**
+  - **GET** `/api/transactions?userId={userId}`
+  - Retrieve all transactions for a specific user.
+  - **Query Parameters**:
+    - `userId` (integer, required): The ID of the user.
   - **Example Response**:
     ```json
     [
       {
         "id": 1,
-        "date": "2023-11-03T10:00:00Z",
+        "date": "03-11-2023",
         "type": "spent",
         "amount": 150.75,
-        "category": "Groceries"
+        "category": "Groceries",
+        "userId": 1
       },
       {
         "id": 2,
-        "date": "2023-11-04T15:30:00Z",
+        "date": "04-11-2023",
         "type": "receive",
         "amount": 2000.00,
-        "category": "Salary"
+        "category": "Salary",
+        "userId": 1
       }
     ]
     ```
 
-- **Retrieve Spent Transactions**
-  - **GET** `/api/transactions/spent`
-  - Retrieve all transactions where `type` is `spent`.
+- **Retrieve Spent Transactions for a User**
+  - **GET** `/api/transactions/spent?userId={userId}`
+  - Retrieve all transactions where `type` is `spent` for a specific user.
+  - **Query Parameters**:
+    - `userId` (integer, required): The ID of the user.
   - **Example Response**:
     ```json
     [
       {
         "id": 1,
-        "date": "2023-11-03T10:00:00Z",
+        "date": "03-11-2023",
         "type": "spent",
         "amount": 150.75,
-        "category": "Groceries"
+        "category": "Groceries",
+        "userId": 1
       }
     ]
     ```
 
-- **Retrieve Receive Transactions**
-  - **GET** `/api/transactions/receive`
-  - Retrieve all transactions where `type` is `receive`.
+- **Retrieve Receive Transactions for a User**
+  - **GET** `/api/transactions/receive?userId={userId}`
+  - Retrieve all transactions where `type` is `receive` for a specific user.
+  - **Query Parameters**:
+    - `userId` (integer, required): The ID of the user.
   - **Example Response**:
     ```json
     [
       {
         "id": 2,
-        "date": "2023-11-04T15:30:00Z",
+        "date": "04-11-2023",
         "type": "receive",
         "amount": 2000.00,
-        "category": "Salary"
+        "category": "Salary",
+        "userId": 1
       }
     ]
     ```
 
-- **Retrieve Transactions by Category**
-  - **GET** `/api/transactions/category/{category}`
-  - Retrieve transactions filtered by a specific category.
+- **Retrieve Transactions by Category for a User**
+  - **GET** `/api/transactions/category/{category}?userId={userId}`
+  - Retrieve transactions filtered by a specific category for a specific user.
   - **Path Parameters**:
     - `category` (string, required): The category to filter transactions by.
+  - **Query Parameters**:
+    - `userId` (integer, required): The ID of the user.
   - **Example Response**:
     ```json
     [
       {
         "id": 1,
-        "date": "2023-11-03T10:00:00Z",
+        "date": "03-11-2023",
         "type": "spent",
         "amount": 150.75,
-        "category": "Groceries"
+        "category": "Groceries",
+        "userId": 1
       }
     ]
     ```
@@ -180,26 +197,30 @@ The API is documented using Swagger. After starting the server, go to `http://lo
   - **Path Parameters**:
     - `id` (integer, required): The ID of the transaction to update.
   - **Body Parameters**:
-    - `date` (string, optional): Updated date in ISO format.
+    - `date` (string, optional): Updated date in DD-MM-YYYY format.
     - `type` (string, optional): Updated type, either `receive` or `spent`.
     - `amount` (number, optional): Updated amount.
     - `category` (string, optional): Updated category.
+    - `userId` (integer, required): The ID of the user.
   - **Example Response**:
     ```json
     {
       "id": 1,
-      "date": "2023-11-03T12:00:00Z",
+      "date": "03-11-2023",
       "type": "spent",
       "amount": 175.00,
-      "category": "Groceries"
+      "category": "Groceries",
+      "userId": 1
     }
     ```
 
 - **Delete Transaction by ID**
-  - **DELETE** `/api/transactions/{id}`
+  - **DELETE** `/api/transactions/{id}?userId={userId}`
   - Delete a transaction by ID.
   - **Path Parameters**:
     - `id` (integer, required): The ID of the transaction to delete.
+  - **Query Parameters**:
+    - `userId` (integer, required): The ID of the user.
   - **Example Response**:
     ```json
     {
