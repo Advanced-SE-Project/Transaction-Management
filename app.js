@@ -4,6 +4,11 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const app = express();
 const PORT = 3000;
+const dotenv = require('dotenv');
+dotenv.config();
+
+// Middleware
+app.use(express.json());
 
 // Swagger setup
 const swaggerDefinition = {
@@ -22,15 +27,27 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./routes/transactions.js'], 
+  apis: ['./routes/transactions.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Set up Swagger UI
 
-// Middleware
-app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`Transaction Microservice received request: ${req.method} ${req.url}`);
+  console.log('Request Body:', req.body);
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log('Transaction Microservice - Incoming Request:', {
+    method: req.method,
+    url: req.originalUrl,
+    body: req.body,
+  });
+  next();
+});
 
 // Routes
 app.use('/api', transactionRoutes);
@@ -40,6 +57,7 @@ if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     console.log(`Swagger docs available at http://localhost:${PORT}/swagger`);
+    console.log(process.env.NODE_ENV);
   });
 }
 

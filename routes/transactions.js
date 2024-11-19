@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = require('../prisma/prismaClient');
 
 // Create a transaction
 /**
@@ -81,28 +80,32 @@ const prisma = new PrismaClient();
  *                   example: "Invalid transaction type" 
  */
 router.post('/transactions', async (req, res) => {
+
     const { date, type, amount, category, userId } = req.body;
-  
+
+    console.log('Received POST body:', req.body);
+
     // Validate required fields
     if (!date || !type || !amount || !category || !userId) {
-      return res.status(400).json({ error: 'All fields are required' });
+        return res.status(400).json({ error: 'All fields are required' });
     }
-  
+
     // Validate transaction type
     const validTypes = ['spent', 'receive'];
     if (!validTypes.includes(type)) {
-      return res.status(400).json({ error: 'Invalid transaction type' });
+        return res.status(400).json({ error: 'Invalid transaction type' });
     }
-  
+
     try {
-      const transaction = await prisma.transaction.create({
-        data: { date, type, amount, category, userId },
-      });
-      res.json(transaction);
+        const transaction = await prisma.transaction.create({
+            data: { date, type, amount, category, userId },
+        });
+        res.json(transaction);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
-  });
+
+});
 
 // Retrieve All Transactions for a Specific User
 /**
