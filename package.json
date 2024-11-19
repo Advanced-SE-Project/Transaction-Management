@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "cross-env NODE_ENV=test jest",
-    "test:integration" : "cross-env NODE_ENV=test newman run tests/integration/TransactionManagementTests.postman_collection.json",
-    "start:test": "cross-env NODE_ENV=test node app.js",
+    "test:integration" : "newman run src/tests/integration/TransactionManagementTests.postman_collection.json",
+    "start:test": "cross-env NODE_ENV=test INTEGRATION_TEST=true node app.js",
     "start:prod": "node app.js"
   },
   "repository": {

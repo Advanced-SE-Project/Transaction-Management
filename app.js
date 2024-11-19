@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 app.use('/api', transactionRoutes);
 
 // Only start the server if not in test mode
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' || process.env.INTEGRATION_TEST === 'true') {
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
     console.log(`Swagger docs available at http://localhost:${port}/swagger`);
