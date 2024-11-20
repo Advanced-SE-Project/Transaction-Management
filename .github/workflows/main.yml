@@ -62,7 +62,7 @@ jobs:
         DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
         NODE_ENV: test
         PORT: 3000
-      run: npm run start:test
+      run: npm run start:test &
 
     - name: Debug environment variables
       run: printenv | grep DATABASE_URL
