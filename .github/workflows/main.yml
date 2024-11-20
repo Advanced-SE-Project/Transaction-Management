@@ -61,7 +61,7 @@ jobs:
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
         NODE_ENV: test
-      run: npm start:test
+      run: npm run start:test
 
     - name: Debug environment variables
       run: printenv | grep DATABASE_URL
