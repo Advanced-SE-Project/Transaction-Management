@@ -59,7 +59,7 @@ jobs:
 
     - name: Start Application Server
       env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+        DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
         NODE_ENV: test
       run: npm run start:test
 
