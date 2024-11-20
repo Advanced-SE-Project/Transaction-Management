@@ -14,6 +14,10 @@ const databaseUrl = process.env.NODE_ENV === 'test'
 
 if (!databaseUrl) {
     console.error("DATABASE_URL is undefined. Check your environment variables.");
+    // Debugging environment variables
+    console.log("NODE_ENV:", process.env.NODE_ENV);
+    console.log("DATABASE_URL_TEST:", process.env.DATABASE_URL_TEST);
+    console.log("DATABASE_URL:", process.env.DATABASE_URL);
     throw new Error("DATABASE_URL is undefined.");
 }
 
