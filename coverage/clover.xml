@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1732139687095" clover="3.2.0">
+  <project timestamp="1732139687095" name="All files">
+    <metrics statements="102" coveredstatements="83" conditionals="17" coveredconditionals="14" methods="10" coveredmethods="8" elements="129" coveredelements="105" complexity="0" loc="102" ncloc="102" packages="4" files="4" classes="4"/>
+    <package name="Transaction-Management">
+      <metrics statements="24" coveredstatements="20" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="2"/>
+      <file name="app.js" path="C:\Users\anton\Desktop\Repositories from Github\Transaction-Management\app.js">
+        <metrics statements="24" coveredstatements="20" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="12" type="stmt"/>
+        <line num="18" count="12" type="stmt"/>
+        <line num="19" count="12" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="12" type="stmt"/>
+        <line num="28" count="12" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="35" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="Transaction-Management.src.prisma">
+      <metrics statements="16" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="prismaClient.js" path="C:\Users\anton\Desktop\Repositories from Github\Transaction-Management\src\prisma\prismaClient.js">
+        <metrics statements="16" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="Transaction-Management.src.routes">
+      <metrics statements="54" coveredstatements="44" conditionals="9" coveredconditionals="9" methods="7" coveredmethods="6"/>
+      <file name="transactions.js" path="C:\Users\anton\Desktop\Repositories from Github\Transaction-Management\src\routes\transactions.js">
+        <metrics statements="54" coveredstatements="44" conditionals="9" coveredconditionals="9" methods="7" coveredmethods="6"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="82" count="2" type="stmt"/>
+        <line num="84" count="4" type="stmt"/>
+        <line num="86" count="4" type="stmt"/>
+        <line num="89" count="4" type="cond" truecount="7" falsecount="0"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="94" count="3" type="stmt"/>
+        <line num="95" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="99" count="2" type="stmt"/>
+        <line num="100" count="2" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="155" count="2" type="stmt"/>
+        <line num="156" count="1" type="stmt"/>
+        <line num="157" count="1" type="stmt"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="161" count="1" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="212" count="2" type="stmt"/>
+        <line num="213" count="1" type="stmt"/>
+        <line num="214" count="1" type="stmt"/>
+        <line num="215" count="1" type="stmt"/>
+        <line num="218" count="1" type="stmt"/>
+        <line num="220" count="0" type="stmt"/>
+        <line num="269" count="2" type="stmt"/>
+        <line num="270" count="1" type="stmt"/>
+        <line num="271" count="1" type="stmt"/>
+        <line num="272" count="1" type="stmt"/>
+        <line num="275" count="1" type="stmt"/>
+        <line num="277" count="0" type="stmt"/>
+        <line num="332" count="2" type="stmt"/>
+        <line num="333" count="0" type="stmt"/>
+        <line num="334" count="0" type="stmt"/>
+        <line num="335" count="0" type="stmt"/>
+        <line num="336" count="0" type="stmt"/>
+        <line num="339" count="0" type="stmt"/>
+        <line num="341" count="0" type="stmt"/>
+        <line num="414" count="2" type="stmt"/>
+        <line num="415" count="2" type="stmt"/>
+        <line num="416" count="2" type="stmt"/>
+        <line num="417" count="2" type="stmt"/>
+        <line num="418" count="2" type="stmt"/>
+        <line num="422" count="1" type="stmt"/>
+        <line num="424" count="1" type="stmt"/>
+        <line num="457" count="2" type="stmt"/>
+        <line num="458" count="2" type="stmt"/>
+        <line num="459" count="2" type="stmt"/>
+        <line num="460" count="2" type="stmt"/>
+        <line num="463" count="1" type="stmt"/>
+        <line num="465" count="1" type="stmt"/>
+        <line num="469" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="Transaction-Management.src.swagger">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="swaggerConfig.js" path="C:\Users\anton\Desktop\Repositories from Github\Transaction-Management\src\swagger\swaggerConfig.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

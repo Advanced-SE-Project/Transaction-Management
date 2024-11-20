@@ -64,9 +64,6 @@ jobs:
       env:
         DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
         NODE_ENV: test
-      run: npm run test:unit
-  
-    - name: Run unit tests with coverage
       run: npm run test:unit -- --coverage
 
     - name: Upload coverage results
