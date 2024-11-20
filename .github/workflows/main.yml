@@ -61,6 +61,7 @@ jobs:
       env:
         DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
         NODE_ENV: test
+        PORT: 3000
       run: npm run start:test
 
     - name: Debug environment variables
