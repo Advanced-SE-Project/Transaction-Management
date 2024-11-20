@@ -1,42 +1,44 @@
 const express = require('express');
-const transactionRoutes = require('./routes/transactions');
+const transactionRoutes = require('./src/routes/transactions');
 const swaggerUi = require('swagger-ui-express');
-const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerSpec = require('./src/swagger/swaggerConfig');
 const app = express();
-const PORT = 3000;
-
-// Swagger setup
-const swaggerDefinition = {
-  openapi: '3.0.0',
-  info: {
-    title: 'Transaction Management API',
-    version: '1.0.0',
-    description: 'API documentation for the Transaction Management microservice',
-  },
-  servers: [
-    {
-      url: 'http://localhost:3000',
-    },
-  ],
-};
-
-const options = {
-  swaggerDefinition,
-  apis: ['./routes/transactions.js'], 
-};
-
-const swaggerSpec = swaggerJSDoc(options);
-
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Set up Swagger UI
+const dotenv = require('dotenv');
+dotenv.config();
+const port = process.env.PORT;
 
 // Middleware
 app.use(express.json());
 
+// Swagger setup
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Set up Swagger UI
+
+app.use((req, res, next) => {
+  console.log(`Transaction Microservice received request: ${req.method} ${req.url}`);
+  console.log('Request Body:', req.body);
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log('Transaction Microservice - Incoming Request:', {
+    method: req.method,
+    url: req.originalUrl,
+    body: req.body,
+  });
+  next();
+});
+
 // Routes
 app.use('/api', transactionRoutes);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`Swagger docs available at http://localhost:${PORT}/swagger`);
-});
+// Only start the server if not in test mode
+if (process.env.NODE_ENV !== 'test' || process.env.INTEGRATION_TEST === 'true') {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Swagger docs available at http://localhost:${port}/swagger`);
+    console.log(process.env.NODE_ENV);
+  });
+}
+
+// Export the app instance for testing
+module.exports = app;
