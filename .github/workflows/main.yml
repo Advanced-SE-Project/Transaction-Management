@@ -57,11 +57,15 @@ jobs:
     - name: Generate Prisma Client
       run: npx prisma generate --schema=src/prisma/schema.prisma
 
+    - name: Debug environment variables
+      run: printenv | grep DATABASE_URL
+
     - name: Run unit tests
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+        NODE_ENV: test
       run: npm run test:unit
-
+  
     - name: Run unit tests with coverage
       run: npm run test:unit -- --coverage
 
