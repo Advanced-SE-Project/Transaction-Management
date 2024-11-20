@@ -53,6 +53,9 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
       run: npx prisma migrate deploy --schema=src/prisma/schema.prisma
 
+    - name: Verify dotenv installation
+      run: npm list dotenv
+
     - name: Run unit tests
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
