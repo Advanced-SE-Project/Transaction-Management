@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "cross-env NODE_ENV=test jest",
-    "test:integration" : "newman run src/tests/integration/TransactionManagementTests.postman_collection.json",
+    "test:integration": "newman run src/tests/integration/TransactionManagementTests.postman_collection.json",
     "start:test": "cross-env NODE_ENV=test INTEGRATION_TEST=true node app.js",
     "start:prod": "node app.js"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Advanced-SE-Project/Transaction-Management#readme",
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
