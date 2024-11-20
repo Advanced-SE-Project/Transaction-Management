@@ -19,9 +19,9 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: transaction_db
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         ports:
           - 5432:5432
         options: >-
@@ -44,7 +44,7 @@ jobs:
 
     - name: Run Prisma migrations
       env:
-        DATABASE_URL: "postgresql://postgres:password@localhost:5432/transaction_db"
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: npx prisma migrate deploy
 
     - name: Run unit tests
