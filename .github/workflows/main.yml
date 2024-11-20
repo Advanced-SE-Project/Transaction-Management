@@ -19,9 +19,10 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+          DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
+          NODE_ENV: test
+          PORT: 3000
         ports:
           - 5432:5432
         options: >-
@@ -42,35 +43,35 @@ jobs:
     - name: Install dependencies
       run: npm install
       
-    - name: Set up environment variables
-      run: |
-        echo "NODE_ENV=test" >> $GITHUB_ENV
-        echo "DATABASE_URL=${{ secrets.DATABASE_URL_TEST }}" >> $GITHUB_ENV
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+    # - name: Set up environment variables
+    #   run: |
+    #     echo "NODE_ENV=test" >> $GITHUB_ENV
+    #     echo "DATABASE_URL=${{ secrets.DATABASE_URL_TEST }}" >> $GITHUB_ENV
+    #   env:
+    #     DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
 
     - name: Run Prisma migrations
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
+      # env:
+      #   DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
       run: npx prisma migrate deploy --schema=src/prisma/schema.prisma
 
     - name: Generate Prisma Client
       run: npx prisma generate --schema=src/prisma/schema.prisma
 
     - name: Start Application Server
-      env:
-        DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
-        NODE_ENV: test
-        PORT: 3000
+      # env:
+        # DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
+        # NODE_ENV: test
+        # PORT: 3000
       run: npm run start:test &
 
-    - name: Debug environment variables
-      run: printenv | grep DATABASE_URL
+    # - name: Debug environment variables
+    #   run: printenv | grep DATABASE_URL
 
     - name: Run unit tests
-      env:
-        DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
-        NODE_ENV: test
+      # env:
+        # DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
+        # NODE_ENV: test
       run: npm run test:unit -- --coverage
 
     - name: Upload coverage results
