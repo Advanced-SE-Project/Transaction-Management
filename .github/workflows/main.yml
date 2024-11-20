@@ -62,8 +62,8 @@ jobs:
 
     - name: Run unit tests
       env:
-        process.env.DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
-        process.env.NODE_ENV: test
+        DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
+        NODE_ENV: test
       run: npm run test:unit
   
     - name: Run unit tests with coverage
