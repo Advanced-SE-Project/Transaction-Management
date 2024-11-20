@@ -41,6 +41,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      
+    - name: Set up environment variables
+      run: |
+        echo "NODE_ENV=test" >> $GITHUB_ENV
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
 
     - name: Run Prisma migrations
       env:
@@ -48,6 +54,8 @@ jobs:
       run: npx prisma migrate deploy --schema=src/prisma/schema.prisma
 
     - name: Run unit tests
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
       run: npm run test:unit
 
     - name: Run unit tests with coverage
