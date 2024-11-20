@@ -8,9 +8,9 @@ console.log("DATABASE_URL_TEST:", process.env.DATABASE_URL_TEST);
 console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 // Choose the correct database URL based on NODE_ENV
-const databaseUrl = process.env.NODE_ENV === 'test'
-    ? process.env.DATABASE_URL_TEST
-    : process.env.DATABASE_URL;
+const databaseUrl = env(NODE_ENV) === 'test'
+    ? env(DATABASE_URL_TEST)
+    : env(DATABASE_URL);
 
 if (!databaseUrl) {
     console.error("DATABASE_URL is undefined. Check your environment variables.");
