@@ -45,6 +45,7 @@ jobs:
     - name: Set up environment variables
       run: |
         echo "NODE_ENV=test" >> $GITHUB_ENV
+        echo "DATABASE_URL=${{ secrets.DATABASE_URL_TEST }}" >> $GITHUB_ENV
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL_TEST }}
 
