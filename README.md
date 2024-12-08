@@ -45,6 +45,12 @@ DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/DATABASE_NAME"
 
 Replace `USER`, `PASSWORD`, and `DATABASE_NAME` with your PostgreSQL credentials.
 
+```plaintext
+PORT=3000
+```
+
+Define PORT number that the server runs on.
+
 ## Database Setup
 
 1. **Initialize Prisma**: Prisma is used as the ORM. Run the following command to generate Prisma client and set up the database:
@@ -66,7 +72,7 @@ This will create the necessary tables in your PostgreSQL database.
 To start the server, run:
 
 ```bash
-npm start
+npm run start:prod
 ```
 
 The server will start on `http://localhost:3000`.
