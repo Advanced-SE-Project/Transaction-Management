@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const transactionRoutes = require('./src/routes/transactions');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./src/swagger/swaggerConfig');
@@ -7,12 +8,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT;
 
-// Middleware
+// Use cors middleware
+app.use(cors());
+
+// Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-// Swagger setup
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Set up Swagger UI
-
+// Logging middleware (after cors)
 app.use((req, res, next) => {
   console.log(`Transaction Microservice received request: ${req.method} ${req.url}`);
   console.log('Request Body:', req.body);
@@ -27,6 +29,9 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+// Swagger setup
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Set up Swagger UI
 
 // Routes
 app.use('/api', transactionRoutes);
