@@ -10,12 +10,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: >
-      sh -c "
-      npx prisma migrate dev --name init --schema=src/prisma/schema.prisma &&
-      npm start
-      "
-
+    networks:
+      - shared_network
   db:
     image: postgres:15
     container_name: postgres_container
@@ -32,6 +28,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - shared_network
 
 volumes:
   postgres_data:
+
+networks:
+  shared_network:
+    external: true

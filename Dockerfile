@@ -1,6 +1,12 @@
 # Use a lightweight Node.js image
 FROM node:18-alpine
 
+# Install system dependencies required for Prisma and OpenSSL
+RUN apk add --no-cache \
+    openssl \
+    bash \
+    libc6-compat
+
 # Set the working directory
 WORKDIR /usr/src/app
 
